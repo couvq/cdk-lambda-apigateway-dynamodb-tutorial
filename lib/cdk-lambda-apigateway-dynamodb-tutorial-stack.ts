@@ -9,8 +9,6 @@ export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
     super(scope, id, props);
 
     const apiGateway = new apigateway.RestApi(this, "APIGateway", {});
-    apiGateway.root.addMethod('GET');
-    const usersResource = apiGateway.root.addResource('users');
 
     const lambdaListUsers = new lambda.Function(this, "lambdaListUsers", {
       runtime: lambda.Runtime.NODEJS_12_X,
@@ -18,6 +16,6 @@ export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, "lambda-handler"))
     });
 
-    usersResource.addMethod('GET', new apigateway.LambdaIntegration(lambdaListUsers));
+    apiGateway.root.addResource('users').addMethod('GET', new apigateway.LambdaIntegration(lambdaListUsers));
   }
 }
