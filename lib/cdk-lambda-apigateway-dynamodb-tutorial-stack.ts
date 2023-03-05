@@ -16,6 +16,8 @@ export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, "lambda-handler"))
     });
 
-    apiGateway.root.addResource('users').addMethod('GET', new apigateway.LambdaIntegration(lambdaListUsers));
+    apiGateway.root
+    .addResource('users')
+    .addMethod('GET', new apigateway.LambdaIntegration(lambdaListUsers));
   }
 }
