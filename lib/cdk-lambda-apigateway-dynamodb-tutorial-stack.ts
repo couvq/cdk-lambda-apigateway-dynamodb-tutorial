@@ -1,16 +1,12 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as cdk from "@aws-cdk/core";
+import { Construct } from "constructs";
+import * as apigateway from "@aws-cdk/aws-apigateway";
 
 export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkLambdaApigatewayDynamodbTutorialQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const apiGateway = new apigateway.RestApi(this, "APIGateway", {});
+    apiGateway.root.addMethod('GET');
   }
 }

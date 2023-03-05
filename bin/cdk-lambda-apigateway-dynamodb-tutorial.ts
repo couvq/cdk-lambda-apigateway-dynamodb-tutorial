@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
-import * as cdk from 'aws-cdk-lib';
+import * as cdk from '@aws-cdk/core';
 import { CdkLambdaApigatewayDynamodbTutorialStack } from '../lib/cdk-lambda-apigateway-dynamodb-tutorial-stack';
 
 const app = new cdk.App();
