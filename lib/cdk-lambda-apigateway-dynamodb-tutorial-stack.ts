@@ -10,7 +10,7 @@ export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
 
     const apiGateway = new apigateway.RestApi(this, "APIGateway", {});
 
-    new dynamodb.Table(this, "Users", {
+    const usersTable = new dynamodb.Table(this, "Users", {
       partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
     });
 
@@ -19,6 +19,8 @@ export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
       handler: "index.handler",
       code: lambda.Code.fromAsset(path.join(__dirname, "lambda-handler")),
     });
+
+    usersTable.grantReadData(lambdaListUsers);
 
     apiGateway.root
       .addResource("users")
