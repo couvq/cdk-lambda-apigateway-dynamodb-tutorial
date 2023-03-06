@@ -18,6 +18,9 @@ export class CdkLambdaApigatewayDynamodbTutorialStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_12_X,
       handler: "index.handler",
       code: lambda.Code.fromAsset(path.join(__dirname, "lambda-handler")),
+      environment: {
+        TABLE_NAME: usersTable.tableName
+      }
     });
 
     usersTable.grantReadData(lambdaListUsers);
